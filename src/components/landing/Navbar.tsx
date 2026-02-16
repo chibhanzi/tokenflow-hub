@@ -1,0 +1,50 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-secondary/80 backdrop-blur-xl">
+      <div className="container flex h-16 items-center justify-between">
+        <Link to="/" className="font-display text-2xl font-bold text-primary">
+          Depeer
+        </Link>
+
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#features" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Features</a>
+          <a href="#how-it-works" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">How It Works</a>
+          <a href="#token-types" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Tokens</a>
+        </div>
+
+        <div className="hidden md:flex items-center gap-3">
+          <Button variant="ghost" className="text-secondary-foreground/80 hover:text-primary" asChild>
+            <Link to="/login">Sign In</Link>
+          </Button>
+          <Button className="gradient-gold text-primary-foreground font-semibold" asChild>
+            <Link to="/register">Get Started</Link>
+          </Button>
+        </div>
+
+        <button className="md:hidden text-secondary-foreground" onClick={() => setOpen(!open)}>
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="md:hidden bg-secondary border-t border-border/50 p-4 space-y-3">
+          <a href="#features" className="block text-sm text-secondary-foreground/70">Features</a>
+          <a href="#how-it-works" className="block text-sm text-secondary-foreground/70">How It Works</a>
+          <div className="flex gap-2 pt-2">
+            <Button variant="ghost" size="sm" asChild><Link to="/login">Sign In</Link></Button>
+            <Button size="sm" className="gradient-gold text-primary-foreground" asChild><Link to="/register">Get Started</Link></Button>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
