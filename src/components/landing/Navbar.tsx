@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import depeerLogo from "@/assets/depeer-logo.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -9,8 +10,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-secondary/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="font-display text-2xl font-bold text-primary">
-          Depeer
+        <Link to="/">
+          <img src={depeerLogo} alt="DePeer" className="h-8" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

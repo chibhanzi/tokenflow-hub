@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Wallet } from "lucide-react";
+import depeerLogo from "@/assets/depeer-logo.png";
 
 const roles = [
   { value: "investor", label: "Investor", desc: "Browse and invest in tokens" },
@@ -25,7 +26,7 @@ const Register = () => {
     <div className="min-h-screen gradient-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="font-display text-3xl font-bold text-primary">Depeer</Link>
+          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-10 mx-auto" /></Link>
           <p className="text-secondary-foreground/50 mt-2">Create your account</p>
         </div>
 
