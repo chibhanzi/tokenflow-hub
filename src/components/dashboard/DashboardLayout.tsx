@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
+import depeerLogo from "@/assets/depeer-logo.png";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
       {/* Sidebar */}
       <aside className="hidden lg:flex w-64 flex-col bg-secondary border-r border-border/30">
         <div className="p-6">
-          <Link to="/" className="font-display text-xl font-bold text-primary">Depeer</Link>
+          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-7" /></Link>
           <p className="text-xs text-secondary-foreground/40 mt-1">{title}</p>
         </div>
         <nav className="flex-1 px-3 space-y-1">
@@ -50,7 +51,7 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
       {/* Mobile header */}
       <div className="flex-1 flex flex-col">
         <header className="lg:hidden flex items-center justify-between border-b border-border/30 bg-secondary px-4 py-3">
-          <Link to="/" className="font-display text-lg font-bold text-primary">Depeer</Link>
+          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6" /></Link>
           <div className="flex gap-2 overflow-x-auto">
             {navItems.map((item) => {
               const active = location.pathname === item.to;

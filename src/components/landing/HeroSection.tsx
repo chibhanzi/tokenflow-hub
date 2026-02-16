@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
+import depeerLogo from "@/assets/depeer-logo.png";
 
 const stats = [
   { label: "Businesses Tokenised", value: "120+" },
