@@ -61,7 +61,7 @@ const AdminDashboard = () => (
                 <div className="text-xs text-muted-foreground">{b.sector} · Submitted {b.submitted}</div>
               </div>
               <div className="flex gap-2">
-                <Button size="sm" className="gradient-gold text-primary-foreground text-xs">
+                <Button size="sm" className="gradient-navy text-primary-foreground text-xs">
                   <CheckCircle size={14} className="mr-1" /> Approve
                 </Button>
                 <Button size="sm" variant="outline" className="text-xs text-destructive border-destructive/30 hover:bg-destructive/5">

@@ -12,31 +12,31 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="py-24 bg-background">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
-            Everything You Need to <span className="text-gradient-gold">Invest & Grow</span>
+    <section id="features" className="py-16 sm:py-24 bg-background">
+      <div className="container px-4 sm:px-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+            Everything You Need to <span className="text-gradient-navy">Invest & Grow</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
             A complete platform for investors and businesses to participate in Africa's tokenised economy.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              className="group rounded-xl border border-border bg-card p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+              className="group rounded-xl border border-border bg-card p-5 sm:p-6 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="w-12 h-12 rounded-lg gradient-gold flex items-center justify-center mb-4">
-                <f.icon size={22} className="text-primary-foreground" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg gradient-navy flex items-center justify-center mb-4">
+                <f.icon size={20} className="text-primary-foreground" />
               </div>
-              <h3 className="font-display text-lg font-semibold mb-2">{f.title}</h3>
+              <h3 className="font-display text-base sm:text-lg font-semibold mb-2">{f.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}

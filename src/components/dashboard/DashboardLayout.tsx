@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, Menu, X } from "lucide-react";
+import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
 
 interface DashboardLayoutProps {
@@ -12,14 +13,15 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) => {
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col bg-secondary border-r border-border/30">
+      {/* Sidebar - Desktop */}
+      <aside className="hidden lg:flex w-64 flex-col bg-card border-r border-border/50 shrink-0">
         <div className="p-6">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-7" /></Link>
-          <p className="text-xs text-secondary-foreground/40 mt-1">{title}</p>
+          <p className="text-xs text-muted-foreground mt-1">{title}</p>
         </div>
         <nav className="flex-1 px-3 space-y-1">
           {navItems.map((item) => {
@@ -32,7 +34,7 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                   active
                     ? "bg-primary/10 text-primary font-medium"
-                    : "text-secondary-foreground/60 hover:text-secondary-foreground hover:bg-secondary-foreground/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
               >
                 <item.icon size={18} />
@@ -41,37 +43,54 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-border/30">
-          <Link to="/login" className="text-xs text-secondary-foreground/40 hover:text-primary transition-colors">
+        <div className="p-4 border-t border-border/50">
+          <Link to="/login" className="text-xs text-muted-foreground hover:text-primary transition-colors">
             Sign Out
           </Link>
         </div>
       </aside>
 
       {/* Mobile header */}
-      <div className="flex-1 flex flex-col">
-        <header className="lg:hidden flex items-center justify-between border-b border-border/30 bg-secondary px-4 py-3">
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="lg:hidden flex items-center justify-between border-b border-border/50 bg-card px-4 py-3">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6" /></Link>
-          <div className="flex gap-2 overflow-x-auto">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-foreground p-1">
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </header>
+
+        {/* Mobile nav dropdown */}
+        {mobileOpen && (
+          <div className="lg:hidden bg-card border-b border-border/50 px-4 py-3 space-y-1">
             {navItems.map((item) => {
               const active = location.pathname === item.to;
               return (
                 <Link
                   key={item.to}
                   to={item.to}
+                  onClick={() => setMobileOpen(false)}
                   className={cn(
-                    "text-xs whitespace-nowrap px-3 py-1.5 rounded-full transition-colors",
-                    active ? "bg-primary/10 text-primary" : "text-secondary-foreground/50"
+                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                    active
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
                 >
+                  <item.icon size={18} />
                   {item.label}
                 </Link>
               );
             })}
+            <Link
+              to="/login"
+              className="block px-3 py-2 text-xs text-muted-foreground hover:text-primary"
+            >
+              Sign Out
+            </Link>
           </div>
-        </header>
+        )}
 
-        <main className="flex-1 p-6 lg:p-8 overflow-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
           {children}
         </main>
       </div>

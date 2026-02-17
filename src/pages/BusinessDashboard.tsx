@@ -32,7 +32,7 @@ const BusinessDashboard = () => (
         <h1 className="font-display text-2xl font-bold">Business Overview</h1>
         <p className="text-muted-foreground text-sm mt-1">Manage your tokens and track revenue</p>
       </div>
-      <Button className="gradient-gold text-primary-foreground font-semibold">
+      <Button className="gradient-navy text-primary-foreground font-semibold">
         <Plus size={16} className="mr-2" /> Issue New Token
       </Button>
     </div>
@@ -68,7 +68,7 @@ const BusinessDashboard = () => (
               <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="hsl(220 10% 46%)" />
               <YAxis tick={{ fontSize: 12 }} stroke="hsl(220 10% 46%)" />
               <Tooltip />
-              <Bar dataKey="revenue" fill="hsl(38 92% 50%)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="revenue" fill="hsl(220 40% 25%)" radius={[4, 4, 0, 0]} />
               <Bar dataKey="payouts" fill="hsl(160 60% 45%)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>

@@ -30,19 +30,19 @@ const Register = () => {
           <p className="text-secondary-foreground/50 mt-2">Create your account</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8">
+        <div className="glass-card rounded-2xl p-6 sm:p-8">
           <div className="grid grid-cols-2 gap-3 mb-6">
             {roles.map((r) => (
               <button
                 key={r.value}
                 onClick={() => setRole(r.value)}
-                className={`rounded-xl p-4 text-left transition-all border ${
+                className={`rounded-xl p-3 sm:p-4 text-left transition-all border ${
                   role === r.value
-                    ? "border-primary bg-primary/10"
+                    ? "border-accent bg-accent/10"
                     : "border-secondary-foreground/10 hover:border-secondary-foreground/20"
                 }`}
               >
-                <div className={`font-display font-semibold text-sm ${role === r.value ? "text-primary" : "text-secondary-foreground/80"}`}>
+                <div className={`font-display font-semibold text-sm ${role === r.value ? "text-accent" : "text-secondary-foreground/80"}`}>
                   {r.label}
                 </div>
                 <div className="text-xs text-secondary-foreground/40 mt-0.5">{r.desc}</div>
@@ -73,7 +73,7 @@ const Register = () => {
                 className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
               />
             </div>
-            <Button type="submit" className="w-full gradient-gold text-primary-foreground font-semibold">
+            <Button type="submit" className="w-full gradient-navy text-primary-foreground font-semibold">
               Create Account
             </Button>
           </form>
@@ -86,7 +86,7 @@ const Register = () => {
 
           <p className="text-center text-sm text-secondary-foreground/40 mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-primary hover:underline">Sign in</Link>
+            <Link to="/login" className="text-accent hover:underline">Sign in</Link>
           </p>
         </div>
       </div>

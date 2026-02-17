@@ -64,15 +64,15 @@ const InvestorDashboard = () => {
               <AreaChart data={portfolioData}>
                 <defs>
                   <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(38 92% 50%)" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="hsl(38 92% 50%)" stopOpacity={0} />
+                    <stop offset="5%" stopColor="hsl(200 70% 50%)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="hsl(200 70% 50%)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 13% 88%)" />
                 <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="hsl(220 10% 46%)" />
                 <YAxis tick={{ fontSize: 12 }} stroke="hsl(220 10% 46%)" />
                 <Tooltip />
-                <Area type="monotone" dataKey="value" stroke="hsl(38 92% 50%)" fill="url(#goldGrad)" strokeWidth={2} />
+                <Area type="monotone" dataKey="value" stroke="hsl(200 70% 50%)" fill="url(#goldGrad)" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -83,7 +83,7 @@ const InvestorDashboard = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base">Your Holdings</CardTitle>
-          <div className="relative w-48">
+          <div className="relative w-36 sm:w-48">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <Input placeholder="Search..." className="pl-8 h-8 text-xs" />
           </div>

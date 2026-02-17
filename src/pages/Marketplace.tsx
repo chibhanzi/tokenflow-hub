@@ -69,7 +69,7 @@ const Marketplace = () => (
                 <div className="font-semibold">{b.available} tokens</div>
               </div>
             </div>
-            <Button className="w-full gradient-gold text-primary-foreground text-sm font-semibold">
+            <Button className="w-full gradient-navy text-primary-foreground text-sm font-semibold">
               Buy Tokens
             </Button>
           </CardContent>
