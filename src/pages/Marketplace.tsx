@@ -1,9 +1,11 @@
+import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { Coins, Search, ShieldCheck, Star, TrendingUp } from "lucide-react";
+import { Coins, Search, ShieldCheck, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import BuyTokenModal from "@/components/marketplace/BuyTokenModal";
 
 const navItems = [
   { to: "/investor", label: "Portfolio", icon: TrendingUp },
@@ -20,63 +22,78 @@ const businesses = [
   { name: "Accra Fintech", sector: "Financial Services", tokens: "Equity", price: "$30/token", risk: 6, revenue: "$300K/mo", available: 600 },
 ];
 
-const Marketplace = () => (
-  <DashboardLayout title="Investor Dashboard" navItems={navItems}>
-    <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div>
-        <h1 className="font-display text-2xl font-bold">Token Marketplace</h1>
-        <p className="text-muted-foreground text-sm mt-1">Browse and invest in tokenised African SMEs</p>
-      </div>
-      <div className="relative w-full sm:w-72">
-        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-        <Input placeholder="Search businesses..." className="pl-8" />
-      </div>
-    </div>
+const Marketplace = () => {
+  const [selected, setSelected] = useState<typeof businesses[0] | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-      {businesses.map((b) => (
-        <Card key={b.name} className="hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all">
-          <CardHeader className="pb-3">
-            <div className="flex items-start justify-between">
-              <div>
-                <CardTitle className="text-base font-display">{b.name}</CardTitle>
-                <p className="text-xs text-muted-foreground mt-0.5">{b.sector}</p>
+  const handleBuy = (b: typeof businesses[0]) => {
+    setSelected(b);
+    setModalOpen(true);
+  };
+
+  return (
+    <DashboardLayout title="Investor Dashboard" navItems={navItems}>
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="font-display text-2xl font-bold">Token Marketplace</h1>
+          <p className="text-muted-foreground text-sm mt-1">Browse and invest in tokenised African SMEs</p>
+        </div>
+        <div className="relative w-full sm:w-72">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Input placeholder="Search businesses..." className="pl-8" />
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        {businesses.map((b) => (
+          <Card key={b.name} className="hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all">
+            <CardHeader className="pb-3">
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle className="text-base font-display">{b.name}</CardTitle>
+                  <p className="text-xs text-muted-foreground mt-0.5">{b.sector}</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{b.tokens}</Badge>
               </div>
-              <Badge variant="secondary" className="text-xs">{b.tokens}</Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <div>
-                <div className="text-muted-foreground text-xs">Price</div>
-                <div className="font-semibold">{b.price}</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground text-xs">Revenue</div>
-                <div className="font-semibold">{b.revenue}</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground text-xs">Risk Score</div>
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 10 }).map((_, i) => (
-                    <div key={i} className={`w-1.5 h-3 rounded-full ${i < b.risk ? "bg-primary" : "bg-muted"}`} />
-                  ))}
-                  <span className="text-xs ml-1 text-muted-foreground">{b.risk}/10</span>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <div className="text-muted-foreground text-xs">Price</div>
+                  <div className="font-semibold">{b.price}</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground text-xs">Revenue</div>
+                  <div className="font-semibold">{b.revenue}</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground text-xs">Risk Score</div>
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <div key={i} className={`w-1.5 h-3 rounded-full ${i < b.risk ? "bg-accent" : "bg-muted"}`} />
+                    ))}
+                    <span className="text-xs ml-1 text-muted-foreground">{b.risk}/10</span>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground text-xs">Available</div>
+                  <div className="font-semibold">{b.available} tokens</div>
                 </div>
               </div>
-              <div>
-                <div className="text-muted-foreground text-xs">Available</div>
-                <div className="font-semibold">{b.available} tokens</div>
-              </div>
-            </div>
-            <Button className="w-full gradient-navy text-primary-foreground text-sm font-semibold">
-              Buy Tokens
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </DashboardLayout>
-);
+              <Button
+                onClick={() => handleBuy(b)}
+                className="w-full bg-accent hover:bg-accent/90 text-white text-sm font-semibold"
+              >
+                Buy Tokens
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <BuyTokenModal business={selected} open={modalOpen} onOpenChange={setModalOpen} />
+    </DashboardLayout>
+  );
+};
 
 export default Marketplace;

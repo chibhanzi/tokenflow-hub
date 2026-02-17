@@ -16,7 +16,7 @@ const FeaturesSection = () => {
       <div className="container px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
-            Everything You Need to <span className="text-gradient-navy">Invest & Grow</span>
+            Everything You Need to <span className="text-accent">Invest & Grow</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
             A complete platform for investors and businesses to participate in Africa's tokenised economy.
