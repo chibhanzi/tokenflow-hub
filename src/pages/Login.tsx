@@ -13,7 +13,6 @@ const Login = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder: connect to backend auth
     navigate("/investor");
   };
 
@@ -25,7 +24,7 @@ const Login = () => {
           <p className="text-secondary-foreground/50 mt-2">Sign in to your account</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-8">
+        <div className="glass-card rounded-2xl p-6 sm:p-8">
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
               <Label htmlFor="email" className="text-secondary-foreground/80">Email</Label>
@@ -49,7 +48,7 @@ const Login = () => {
                 className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
               />
             </div>
-            <Button type="submit" className="w-full gradient-gold text-primary-foreground font-semibold">
+            <Button type="submit" className="w-full gradient-navy text-primary-foreground font-semibold">
               Sign In
             </Button>
           </form>
@@ -62,7 +61,7 @@ const Login = () => {
 
           <p className="text-center text-sm text-secondary-foreground/40 mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-primary hover:underline">Sign up</Link>
+            <Link to="/register" className="text-accent hover:underline">Sign up</Link>
           </p>
         </div>
       </div>
