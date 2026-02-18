@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { Coins, Search, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3 } from "lucide-react";
+import { Coins, Search, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -106,7 +107,10 @@ const businesses = [
   },
 ];
 
+const toSlug = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+
 const Marketplace = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState<typeof businesses[0] | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -177,12 +181,21 @@ const Marketplace = () => {
                 </span>
               </div>
 
-              <Button
-                onClick={() => handleBuy(b)}
-                className="w-full bg-accent hover:bg-accent/90 text-white text-sm font-semibold"
-              >
-                Buy Tokens
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => navigate(`/investor/company/${toSlug(b.name)}`)}
+                  className="flex-1 text-sm font-semibold"
+                >
+                  <Eye size={14} className="mr-1" /> View Details
+                </Button>
+                <Button
+                  onClick={() => handleBuy(b)}
+                  className="flex-1 bg-accent hover:bg-accent/90 text-white text-sm font-semibold"
+                >
+                  Buy Tokens
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}

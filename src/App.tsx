@@ -15,6 +15,7 @@ import BusinessInvestors from "./pages/BusinessInvestors";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminBusinesses from "./pages/AdminBusinesses";
 import AdminUsers from "./pages/AdminUsers";
+import CompanyProfile from "./pages/CompanyProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/investor" element={<InvestorDashboard />} />
           <Route path="/investor/marketplace" element={<Marketplace />} />
           <Route path="/investor/transactions" element={<Transactions />} />
+          <Route path="/investor/company/:slug" element={<CompanyProfile />} />
           <Route path="/business" element={<BusinessDashboard />} />
           <Route path="/business/tokens" element={<BusinessTokens />} />
           <Route path="/business/investors" element={<BusinessInvestors />} />

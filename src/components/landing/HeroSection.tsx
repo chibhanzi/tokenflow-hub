@@ -62,7 +62,7 @@ const HeroSection = () => {
                 Start Investing <ArrowRight className="ml-2" size={18} />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
+            <Button size="lg" className="border border-white/30 bg-transparent text-white hover:bg-white/10 font-semibold text-base px-8" asChild>
               <Link to="/register">List Your Business</Link>
             </Button>
           </motion.div>

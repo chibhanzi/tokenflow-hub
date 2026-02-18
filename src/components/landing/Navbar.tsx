@@ -8,40 +8,40 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-secondary/80 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[hsl(220,35%,10%,0.9)] backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6">
         <Link to="/">
-          <img src={depeerLogo} alt="DePeer" className="h-9 sm:h-10" />
+          <img src={depeerLogo} alt="DePeer" className="h-9 sm:h-10 brightness-0 invert" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href="#features" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Features</a>
-          <a href="#how-it-works" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">How It Works</a>
-          <a href="#token-types" className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors">Tokens</a>
+          <a href="#features" className="text-sm text-white/70 hover:text-white transition-colors">Features</a>
+          <a href="#how-it-works" className="text-sm text-white/70 hover:text-white transition-colors">How It Works</a>
+          <a href="#token-types" className="text-sm text-white/70 hover:text-white transition-colors">Tokens</a>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" className="text-secondary-foreground/80 hover:text-primary" asChild>
+          <Button variant="ghost" className="text-white/80 hover:text-white hover:bg-white/10" asChild>
             <Link to="/login">Sign In</Link>
           </Button>
-          <Button className="gradient-navy text-primary-foreground font-semibold" asChild>
+          <Button className="bg-accent hover:bg-accent/90 text-white font-semibold" asChild>
             <Link to="/register">Get Started</Link>
           </Button>
         </div>
 
-        <button className="md:hidden text-secondary-foreground" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-secondary border-t border-border/50 p-4 space-y-3">
-          <a href="#features" className="block text-sm text-secondary-foreground/70 py-2">Features</a>
-          <a href="#how-it-works" className="block text-sm text-secondary-foreground/70 py-2">How It Works</a>
-          <a href="#token-types" className="block text-sm text-secondary-foreground/70 py-2">Tokens</a>
+        <div className="md:hidden bg-[hsl(220,35%,10%)] border-t border-white/10 p-4 space-y-3">
+          <a href="#features" className="block text-sm text-white/70 py-2">Features</a>
+          <a href="#how-it-works" className="block text-sm text-white/70 py-2">How It Works</a>
+          <a href="#token-types" className="block text-sm text-white/70 py-2">Tokens</a>
           <div className="flex flex-col gap-2 pt-2">
-            <Button variant="ghost" size="sm" className="justify-start" asChild><Link to="/login">Sign In</Link></Button>
-            <Button size="sm" className="gradient-navy text-primary-foreground" asChild><Link to="/register">Get Started</Link></Button>
+            <Button variant="ghost" size="sm" className="justify-start text-white/80 hover:text-white hover:bg-white/10" asChild><Link to="/login">Sign In</Link></Button>
+            <Button size="sm" className="bg-accent hover:bg-accent/90 text-white" asChild><Link to="/register">Get Started</Link></Button>
           </div>
         </div>
       )}
