@@ -17,51 +17,54 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-10 mx-auto" /></Link>
-          <p className="text-secondary-foreground/50 mt-2">Sign in to your account</p>
+          <p className="text-muted-foreground mt-2 text-sm">Sign in to your account</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-6 sm:p-8">
+        <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm">
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <Label htmlFor="email" className="text-secondary-foreground/80">Email</Label>
+              <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
+                className="mt-1.5 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
             <div>
-              <Label htmlFor="password" className="text-secondary-foreground/80">Password</Label>
+              <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
               <Input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
+                className="mt-1.5 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
-            <Button type="submit" className="w-full gradient-navy text-primary-foreground font-semibold">
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
               Sign In
             </Button>
           </form>
 
-          <div className="mt-4">
-            <Button variant="outline" className="w-full border-secondary-foreground/10 text-secondary-foreground/70 hover:bg-secondary-foreground/5">
-              <Wallet size={18} className="mr-2" /> Connect TON Wallet
-            </Button>
+          <div className="relative my-5">
+            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
+            <div className="relative flex justify-center text-xs"><span className="bg-card px-3 text-muted-foreground">or</span></div>
           </div>
 
-          <p className="text-center text-sm text-secondary-foreground/40 mt-6">
+          <Button variant="outline" className="w-full border-border text-foreground hover:bg-muted">
+            <Wallet size={18} className="mr-2" /> Connect TON Wallet
+          </Button>
+
+          <p className="text-center text-sm text-muted-foreground mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-accent hover:underline">Sign up</Link>
+            <Link to="/register" className="text-accent font-medium hover:underline">Sign up</Link>
           </p>
         </div>
       </div>
