@@ -18,10 +18,10 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
   return (
     <div className="min-h-screen bg-background flex">
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex w-64 flex-col bg-card border-r border-border/50 shrink-0">
+      <aside className="hidden lg:flex w-64 flex-col bg-[hsl(220,35%,12%)] border-r border-white/10 shrink-0">
         <div className="p-6">
-          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-7" /></Link>
-          <p className="text-xs text-muted-foreground mt-1">{title}</p>
+          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-7 brightness-0 invert" /></Link>
+          <p className="text-xs text-white/50 mt-1">{title}</p>
         </div>
         <nav className="flex-1 px-3 space-y-1">
           {navItems.map((item) => {
@@ -33,8 +33,8 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                   active
-                    ? "bg-primary/10 text-primary font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "bg-white/10 text-white font-medium"
+                    : "text-white/50 hover:text-white hover:bg-white/5"
                 )}
               >
                 <item.icon size={18} />
@@ -43,8 +43,8 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-border/50">
-          <Link to="/login" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+        <div className="p-4 border-t border-white/10">
+          <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors">
             Sign Out
           </Link>
         </div>
@@ -52,16 +52,16 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
 
       {/* Mobile header */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="lg:hidden flex items-center justify-between border-b border-border/50 bg-card px-4 py-3">
-          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6" /></Link>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-foreground p-1">
+        <header className="lg:hidden flex items-center justify-between border-b border-white/10 bg-[hsl(220,35%,12%)] px-4 py-3">
+          <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6 brightness-0 invert" /></Link>
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </header>
 
         {/* Mobile nav dropdown */}
         {mobileOpen && (
-          <div className="lg:hidden bg-card border-b border-border/50 px-4 py-3 space-y-1">
+          <div className="lg:hidden bg-[hsl(220,35%,12%)] border-b border-white/10 px-4 py-3 space-y-1">
             {navItems.map((item) => {
               const active = location.pathname === item.to;
               return (
@@ -72,8 +72,8 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
                     active
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "bg-white/10 text-white font-medium"
+                      : "text-white/50 hover:text-white hover:bg-white/5"
                   )}
                 >
                   <item.icon size={18} />
@@ -83,7 +83,7 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
             })}
             <Link
               to="/login"
-              className="block px-3 py-2 text-xs text-muted-foreground hover:text-primary"
+              className="block px-3 py-2 text-xs text-white/50 hover:text-white"
             >
               Sign Out
             </Link>

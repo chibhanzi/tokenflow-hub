@@ -1,10 +1,12 @@
+import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, Search, TrendingUp, Wallet } from "lucide-react";
+import { BarChart3, Coins, History, Search, TrendingUp, Wallet, TrendingDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import SellTokenModal from "@/components/marketplace/SellTokenModal";
 
 const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
@@ -25,6 +27,14 @@ const holdings = [
 ];
 
 const InvestorDashboard = () => {
+  const [sellModalOpen, setSellModalOpen] = useState(false);
+  const [selectedHolding, setSelectedHolding] = useState<typeof holdings[0] | null>(null);
+
+  const handleSell = (h: typeof holdings[0]) => {
+    setSelectedHolding(h);
+    setSellModalOpen(true);
+  };
+
   return (
     <DashboardLayout title="Investor Dashboard" navItems={navItems}>
       <div className="mb-8">
@@ -99,6 +109,7 @@ const InvestorDashboard = () => {
                   <th className="text-right py-3 font-medium">Value</th>
                   <th className="text-right py-3 font-medium">ROI</th>
                   <th className="text-right py-3 font-medium">Risk</th>
+                  <th className="text-right py-3 font-medium">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -114,6 +125,16 @@ const InvestorDashboard = () => {
                         {h.risk}
                       </Badge>
                     </td>
+                    <td className="text-right">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-xs h-7"
+                        onClick={() => handleSell(h)}
+                      >
+                        <TrendingDown size={12} className="mr-1" /> Sell
+                      </Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -121,6 +142,8 @@ const InvestorDashboard = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SellTokenModal holding={selectedHolding} open={sellModalOpen} onOpenChange={setSellModalOpen} />
     </DashboardLayout>
   );
 };
