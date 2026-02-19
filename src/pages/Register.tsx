@@ -23,14 +23,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-10 mx-auto" /></Link>
-          <p className="text-secondary-foreground/50 mt-2">Create your account</p>
+          <p className="text-muted-foreground mt-2 text-sm">Create your account</p>
         </div>
 
-        <div className="glass-card rounded-2xl p-6 sm:p-8">
+        <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm">
           <div className="grid grid-cols-2 gap-3 mb-6">
             {roles.map((r) => (
               <button
@@ -39,54 +39,57 @@ const Register = () => {
                 className={`rounded-xl p-3 sm:p-4 text-left transition-all border ${
                   role === r.value
                     ? "border-accent bg-accent/10"
-                    : "border-secondary-foreground/10 hover:border-secondary-foreground/20"
+                    : "border-border hover:border-muted-foreground/30"
                 }`}
               >
-                <div className={`font-display font-semibold text-sm ${role === r.value ? "text-accent" : "text-secondary-foreground/80"}`}>
+                <div className={`font-display font-semibold text-sm ${role === r.value ? "text-accent" : "text-foreground"}`}>
                   {r.label}
                 </div>
-                <div className="text-xs text-secondary-foreground/40 mt-0.5">{r.desc}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{r.desc}</div>
               </button>
             ))}
           </div>
 
           <form onSubmit={handleRegister} className="space-y-5">
             <div>
-              <Label htmlFor="email" className="text-secondary-foreground/80">Email</Label>
+              <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
+                className="mt-1.5 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
             <div>
-              <Label htmlFor="password" className="text-secondary-foreground/80">Password</Label>
+              <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
               <Input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1.5 bg-secondary-foreground/5 border-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/30"
+                className="mt-1.5 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground"
               />
             </div>
-            <Button type="submit" className="w-full gradient-navy text-primary-foreground font-semibold">
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
               Create Account
             </Button>
           </form>
 
-          <div className="mt-4">
-            <Button variant="outline" className="w-full border-secondary-foreground/10 text-secondary-foreground/70 hover:bg-secondary-foreground/5">
-              <Wallet size={18} className="mr-2" /> Connect TON Wallet
-            </Button>
+          <div className="relative my-5">
+            <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
+            <div className="relative flex justify-center text-xs"><span className="bg-card px-3 text-muted-foreground">or</span></div>
           </div>
 
-          <p className="text-center text-sm text-secondary-foreground/40 mt-6">
+          <Button variant="outline" className="w-full border-border text-foreground hover:bg-muted">
+            <Wallet size={18} className="mr-2" /> Connect TON Wallet
+          </Button>
+
+          <p className="text-center text-sm text-muted-foreground mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-accent hover:underline">Sign in</Link>
+            <Link to="/login" className="text-accent font-medium hover:underline">Sign in</Link>
           </p>
         </div>
       </div>
