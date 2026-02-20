@@ -22,6 +22,8 @@ interface BuyTokenModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const PRESETS = [5, 10, 25, 50];
+
 const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => {
   const [quantity, setQuantity] = useState(1);
   const { toast } = useToast();
@@ -30,6 +32,8 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
 
   const priceNum = parseFloat(business.price.replace("$", "").replace("/token", ""));
   const total = (priceNum * quantity).toFixed(2);
+
+  const setQty = (v: number) => setQuantity(Math.min(Math.max(1, v), business.available));
 
   const handlePurchase = () => {
     toast({
@@ -49,24 +53,42 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
         </DialogHeader>
 
         <div className="space-y-5 pt-2">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Price per token</span>
-            <span className="font-semibold">${priceNum.toFixed(2)}</span>
-          </div>
-
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Available</span>
-            <span className="font-semibold">{business.available} tokens</span>
+          <div className="grid grid-cols-2 gap-3 rounded-lg bg-muted/50 p-3 text-sm">
+            <div>
+              <div className="text-xs text-muted-foreground mb-0.5">Price per token</div>
+              <div className="font-semibold">${priceNum.toFixed(2)}</div>
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground mb-0.5">Available</div>
+              <div className="font-semibold">{business.available.toLocaleString()} tokens</div>
+            </div>
           </div>
 
           <div>
             <Label className="text-sm mb-2 block">Quantity</Label>
+            {/* Quick presets */}
+            <div className="flex gap-2 mb-3">
+              {PRESETS.filter(p => p <= business.available).map(p => (
+                <button
+                  key={p}
+                  onClick={() => setQty(p)}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                    quantity === p
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-muted/50 text-muted-foreground border-border hover:border-primary/40"
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+            {/* Manual input */}
             <div className="flex items-center gap-3">
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="h-10 w-10 shrink-0"
+                onClick={() => setQty(quantity - 1)}
                 disabled={quantity <= 1}
               >
                 <Minus size={14} />
@@ -76,17 +98,14 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
                 min={1}
                 max={business.available}
                 value={quantity}
-                onChange={(e) => {
-                  const v = parseInt(e.target.value) || 1;
-                  setQuantity(Math.min(Math.max(1, v), business.available));
-                }}
-                className="w-24 text-center"
+                onChange={(e) => setQty(parseInt(e.target.value) || 1)}
+                className="text-center font-semibold text-base"
               />
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9"
-                onClick={() => setQuantity(Math.min(business.available, quantity + 1))}
+                className="h-10 w-10 shrink-0"
+                onClick={() => setQty(quantity + 1)}
                 disabled={quantity >= business.available}
               >
                 <Plus size={14} />
@@ -96,10 +115,10 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
 
           <div className="rounded-lg bg-muted p-4 flex items-center justify-between">
             <span className="text-sm font-medium">Total</span>
-            <span className="font-display text-xl font-bold">${total}</span>
+            <span className="font-display text-2xl font-bold">${total}</span>
           </div>
 
-          <Button onClick={handlePurchase} className="w-full bg-accent hover:bg-accent/90 text-white font-semibold">
+          <Button onClick={handlePurchase} className="w-full bg-accent hover:bg-accent/90 text-white font-semibold h-11 text-base">
             <Wallet size={16} className="mr-2" />
             Pay with RenexPay
           </Button>

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, Search, TrendingUp, Wallet, TrendingDown } from "lucide-react";
+import { BarChart3, Coins, History, Search, TrendingUp, Wallet, TrendingDown, ShoppingCart } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import SellTokenModal from "@/components/marketplace/SellTokenModal";
+import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
@@ -21,19 +23,29 @@ const portfolioData = [
 ];
 
 const holdings = [
-  { name: "Nala Logistics", type: "Revenue", tokens: 150, value: "$2,250", roi: "+12.4%", risk: "Low" },
-  { name: "Mombasa Farms", type: "Asset", tokens: 80, value: "$1,600", roi: "+8.2%", risk: "Medium" },
-  { name: "TechHub Lagos", type: "Equity", tokens: 200, value: "$4,000", roi: "+22.1%", risk: "High" },
+  { name: "Nala Logistics", type: "Revenue", tokens: 150, value: "$2,250", roi: "+12.4%", risk: "Low", color: "from-blue-500 to-blue-700" },
+  { name: "Mombasa Farms", type: "Asset", tokens: 80, value: "$1,600", roi: "+8.2%", risk: "Medium", color: "from-green-500 to-green-700" },
+  { name: "TechHub Lagos", type: "Equity", tokens: 200, value: "$4,000", roi: "+22.1%", risk: "High", color: "from-purple-500 to-purple-700" },
 ];
+
+const riskColor = {
+  Low: "bg-green-500/10 text-green-600 border-green-500/20",
+  Medium: "bg-yellow-500/10 text-yellow-600 border-yellow-500/20",
+  High: "bg-red-500/10 text-red-600 border-red-500/20",
+};
 
 const InvestorDashboard = () => {
   const [sellModalOpen, setSellModalOpen] = useState(false);
   const [selectedHolding, setSelectedHolding] = useState<typeof holdings[0] | null>(null);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const handleSell = (h: typeof holdings[0]) => {
     setSelectedHolding(h);
     setSellModalOpen(true);
   };
+
+  const filtered = holdings.filter(h => h.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <DashboardLayout title="Investor Dashboard" navItems={navItems}>
@@ -91,15 +103,16 @@ const InvestorDashboard = () => {
 
       {/* Holdings */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-row items-center justify-between pb-4">
           <CardTitle className="text-base">Your Holdings</CardTitle>
           <div className="relative w-36 sm:w-48">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <Input placeholder="Search..." className="pl-8 h-8 text-xs" />
+            <Input placeholder="Search..." className="pl-8 h-8 text-xs" value={search} onChange={e => setSearch(e.target.value)} />
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
+        <CardContent className="p-0">
+          {/* Desktop table */}
+          <div className="hidden sm:block overflow-x-auto px-6 pb-6">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-muted-foreground">
@@ -109,11 +122,11 @@ const InvestorDashboard = () => {
                   <th className="text-right py-3 font-medium">Value</th>
                   <th className="text-right py-3 font-medium">ROI</th>
                   <th className="text-right py-3 font-medium">Risk</th>
-                  <th className="text-right py-3 font-medium">Action</th>
+                  <th className="text-right py-3 font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {holdings.map((h) => (
+                {filtered.map((h) => (
                   <tr key={h.name} className="border-b border-border/50 hover:bg-muted/50 transition-colors">
                     <td className="py-3 font-medium">{h.name}</td>
                     <td><Badge variant="secondary" className="text-xs">{h.type}</Badge></td>
@@ -121,24 +134,68 @@ const InvestorDashboard = () => {
                     <td className="text-right font-medium">{h.value}</td>
                     <td className="text-right text-accent font-medium">{h.roi}</td>
                     <td className="text-right">
-                      <Badge variant={h.risk === "Low" ? "default" : h.risk === "Medium" ? "secondary" : "destructive"} className="text-xs">
+                      <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full border", riskColor[h.risk as keyof typeof riskColor])}>
                         {h.risk}
-                      </Badge>
+                      </span>
                     </td>
                     <td className="text-right">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="text-xs h-7"
-                        onClick={() => handleSell(h)}
-                      >
-                        <TrendingDown size={12} className="mr-1" /> Sell
-                      </Button>
+                      <div className="flex items-center justify-end gap-2">
+                        <Button variant="outline" size="sm" className="text-xs h-7 gap-1" onClick={() => navigate("/investor/marketplace")}>
+                          <ShoppingCart size={11} /> Buy More
+                        </Button>
+                        <Button size="sm" className="text-xs h-7 gap-1 bg-destructive hover:bg-destructive/90 text-destructive-foreground" onClick={() => handleSell(h)}>
+                          <TrendingDown size={11} /> Sell
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile cards */}
+          <div className="sm:hidden divide-y divide-border">
+            {filtered.map((h) => (
+              <div key={h.name} className="p-4 space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${h.color} flex items-center justify-center text-white font-bold text-xs shrink-0`}>
+                    {h.name.split(" ").map(w => w[0]).join("").slice(0, 2)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-sm truncate">{h.name}</div>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <Badge variant="secondary" className="text-xs">{h.type}</Badge>
+                      <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full border", riskColor[h.risk as keyof typeof riskColor])}>
+                        {h.risk} Risk
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="bg-muted/50 rounded-lg p-2">
+                    <div className="text-xs text-muted-foreground">Tokens</div>
+                    <div className="font-semibold text-sm">{h.tokens}</div>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-2">
+                    <div className="text-xs text-muted-foreground">Value</div>
+                    <div className="font-semibold text-sm">{h.value}</div>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-2">
+                    <div className="text-xs text-muted-foreground">ROI</div>
+                    <div className="font-semibold text-sm text-accent">{h.roi}</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button variant="outline" className="gap-1.5 font-semibold" onClick={() => navigate("/investor/marketplace")}>
+                    <ShoppingCart size={14} /> Buy More
+                  </Button>
+                  <Button className="gap-1.5 font-semibold bg-destructive hover:bg-destructive/90 text-destructive-foreground" onClick={() => handleSell(h)}>
+                    <TrendingDown size={14} /> Sell Tokens
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
