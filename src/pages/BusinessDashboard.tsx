@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import IssueTokenModal from "@/components/business/IssueTokenModal";
+import EscrowTracker from "@/components/escrow/EscrowTracker";
 
 const navItems = [
   { to: "/business", label: "Overview", icon: Building2 },
@@ -62,9 +63,7 @@ const BusinessDashboard = () => {
 
       {/* Revenue Chart */}
       <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-base">Revenue & Payouts</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle className="text-base">Revenue & Payouts</CardTitle></CardHeader>
         <CardContent>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -81,11 +80,14 @@ const BusinessDashboard = () => {
         </CardContent>
       </Card>
 
+      {/* Escrow Tracker */}
+      <div className="mb-8">
+        <EscrowTracker />
+      </div>
+
       {/* Issued Tokens */}
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Issued Tokens</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle className="text-base">Issued Tokens</CardTitle></CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
