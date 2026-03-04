@@ -3,12 +3,16 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import InvestorDashboard from "./pages/InvestorDashboard";
 import Marketplace from "./pages/Marketplace";
 import Transactions from "./pages/Transactions";
+import PayoutsDashboard from "./pages/PayoutsDashboard";
+import CompareBusinesses from "./pages/CompareBusinesses";
+import InvestorRiskProfile from "./pages/InvestorRiskProfile";
 import BusinessDashboard from "./pages/BusinessDashboard";
 import BusinessTokens from "./pages/BusinessTokens";
 import BusinessInvestors from "./pages/BusinessInvestors";
@@ -22,28 +26,33 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/investor" element={<InvestorDashboard />} />
-          <Route path="/investor/marketplace" element={<Marketplace />} />
-          <Route path="/investor/transactions" element={<Transactions />} />
-          <Route path="/investor/company/:slug" element={<CompanyProfile />} />
-          <Route path="/business" element={<BusinessDashboard />} />
-          <Route path="/business/tokens" element={<BusinessTokens />} />
-          <Route path="/business/investors" element={<BusinessInvestors />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/businesses" element={<AdminBusinesses />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <CurrencyProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/investor" element={<InvestorDashboard />} />
+            <Route path="/investor/marketplace" element={<Marketplace />} />
+            <Route path="/investor/transactions" element={<Transactions />} />
+            <Route path="/investor/payouts" element={<PayoutsDashboard />} />
+            <Route path="/investor/compare" element={<CompareBusinesses />} />
+            <Route path="/investor/risk-profile" element={<InvestorRiskProfile />} />
+            <Route path="/investor/company/:slug" element={<CompanyProfile />} />
+            <Route path="/business" element={<BusinessDashboard />} />
+            <Route path="/business/tokens" element={<BusinessTokens />} />
+            <Route path="/business/investors" element={<BusinessInvestors />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/businesses" element={<AdminBusinesses />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </CurrencyProvider>
   </QueryClientProvider>
 );
 

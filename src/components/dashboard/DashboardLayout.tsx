@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { LucideIcon, Menu, X } from "lucide-react";
 import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
+import NotificationPanel from "@/components/notifications/NotificationPanel";
+import CurrencySelector from "@/components/CurrencySelector";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -43,8 +45,12 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-white/10">
-          <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors">
+        <div className="p-4 border-t border-white/10 space-y-3">
+          <div className="flex items-center gap-2">
+            <CurrencySelector />
+            <NotificationPanel />
+          </div>
+          <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors block">
             Sign Out
           </Link>
         </div>
@@ -54,9 +60,13 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
       <div className="flex-1 flex flex-col min-w-0">
         <header className="lg:hidden flex items-center justify-between border-b border-white/10 bg-[hsl(220,35%,12%)] px-4 py-3">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6 brightness-0 invert" /></Link>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <CurrencySelector />
+            <NotificationPanel />
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </header>
 
         {/* Mobile nav dropdown */}
