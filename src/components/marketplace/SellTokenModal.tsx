@@ -61,6 +61,29 @@ const SellTokenModal = ({ holding, open, onOpenChange }: SellTokenModalProps) =>
 
           <div>
             <Label className="text-sm mb-2 block">Quantity to sell</Label>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {[
+                { label: "25%", factor: 0.25 },
+                { label: "50%", factor: 0.5 },
+                { label: "75%", factor: 0.75 },
+                { label: "Max", factor: 1 },
+              ].map(({ label, factor }) => {
+                const qty = Math.max(1, Math.floor(holding.tokens * factor));
+                return (
+                  <button
+                    key={label}
+                    onClick={() => setQuantity(qty)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                      quantity === qty
+                        ? "bg-destructive text-destructive-foreground border-destructive"
+                        : "bg-muted/50 text-muted-foreground border-border hover:border-destructive/40"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
             <div className="flex items-center gap-3">
               <Button
                 variant="outline"
