@@ -20,16 +20,15 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(220,35%,8%)]/95 via-[hsl(220,35%,8%)]/80 to-[hsl(220,35%,8%)]/50" />
 
+      {/* Large faint logo embedded in the background */}
+      <img
+        src={depeerLogo}
+        alt=""
+        className="absolute right-[-5%] top-1/2 -translate-y-1/2 h-[70vh] sm:h-[80vh] opacity-[0.06] brightness-0 invert pointer-events-none select-none"
+      />
+
       <div className="container relative z-10 pt-24 pb-16 px-4 sm:px-6">
         <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <img src={depeerLogo} alt="DePeer" className="h-12 sm:h-14 brightness-0 invert" />
-          </motion.div>
 
           <motion.h1
             className="font-display text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight mb-6 text-white"
