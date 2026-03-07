@@ -24,7 +24,7 @@ const HeroSection = () => {
       <img
         src={depeerLogo}
         alt=""
-        className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.12] brightness-0 invert pointer-events-none select-none object-contain"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] max-w-[700px] opacity-[0.12] brightness-0 invert pointer-events-none select-none object-contain"
       />
 
       <div className="container relative z-10 pt-24 pb-16 px-4 sm:px-6">
