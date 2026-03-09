@@ -18,6 +18,7 @@ const Navbar = () => {
           <a href="#features" className="text-sm text-white/70 hover:text-white transition-colors">Features</a>
           <a href="#how-it-works" className="text-sm text-white/70 hover:text-white transition-colors">How It Works</a>
           <a href="#token-types" className="text-sm text-white/70 hover:text-white transition-colors">Tokens</a>
+          <Link to="/pricing" className="text-sm text-white/70 hover:text-white transition-colors">Pricing</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
