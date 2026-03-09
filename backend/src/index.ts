@@ -8,6 +8,7 @@ import businessRoutes from "./routes/businesses";
 import tokenRoutes from "./routes/tokens";
 import transactionRoutes from "./routes/transactions";
 import adminRoutes from "./routes/admin";
+import paymentRoutes from "./routes/payments";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use("/api/businesses", businessRoutes);
 app.use("/api/tokens", tokenRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/payments", paymentRoutes);
 
 /* ── Health check ── */
 app.get("/api/health", (_req, res) => {
