@@ -145,7 +145,7 @@ const PaynowCheckout = ({
 
         {step === "success" && (
           <div className="py-12 text-center space-y-4">
-            <CheckCircle2 size={48} className="mx-auto text-green-500" />
+            <CheckCircle2 size={48} className="mx-auto text-success" />
             <div>
               <p className="font-semibold text-lg">Payment Successful!</p>
               <p className="text-sm text-muted-foreground mt-1">
