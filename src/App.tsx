@@ -21,6 +21,7 @@ import AdminBusinesses from "./pages/AdminBusinesses";
 import AdminUsers from "./pages/AdminUsers";
 import CompanyProfile from "./pages/CompanyProfile";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
