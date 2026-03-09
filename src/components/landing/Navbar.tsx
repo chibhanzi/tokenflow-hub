@@ -40,6 +40,7 @@ const Navbar = () => {
           <a href="#features" className="block text-sm text-white/70 py-2">Features</a>
           <a href="#how-it-works" className="block text-sm text-white/70 py-2">How It Works</a>
           <a href="#token-types" className="block text-sm text-white/70 py-2">Tokens</a>
+          <Link to="/pricing" className="block text-sm text-white/70 py-2">Pricing</Link>
           <div className="flex flex-col gap-2 pt-2">
             <Button variant="ghost" size="sm" className="justify-start text-white/80 hover:text-white hover:bg-white/10" asChild><Link to="/login">Sign In</Link></Button>
             <Button size="sm" className="bg-accent hover:bg-accent/90 text-white" asChild><Link to="/register">Get Started</Link></Button>

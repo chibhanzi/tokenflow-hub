@@ -26,6 +26,7 @@ app.use("/api/businesses", businessRoutes);
 app.use("/api/tokens", tokenRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/payments", paymentRoutes);
 
 /* ── Health check ── */
 app.get("/api/health", (_req, res) => {
