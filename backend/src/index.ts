@@ -8,6 +8,7 @@ import businessRoutes from "./routes/businesses";
 import tokenRoutes from "./routes/tokens";
 import transactionRoutes from "./routes/transactions";
 import adminRoutes from "./routes/admin";
+import paymentRoutes from "./routes/payments";
 
 dotenv.config();
 
