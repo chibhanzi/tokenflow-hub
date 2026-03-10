@@ -64,7 +64,6 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6 brightness-0 invert" /></Link>
           <div className="flex items-center gap-2">
             <WalletBadge />
-            <CurrencySelector />
             <NotificationPanel />
             <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -94,6 +93,9 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                 </Link>
               );
             })}
+            <div className="flex items-center gap-3 px-3 py-2 border-t border-white/10 mt-2 pt-3">
+              <CurrencySelector />
+            </div>
             <Link
               to="/login"
               className="block px-3 py-2 text-xs text-white/50 hover:text-white"
