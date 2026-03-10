@@ -5,6 +5,7 @@ import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
 import NotificationPanel from "@/components/notifications/NotificationPanel";
 import CurrencySelector from "@/components/CurrencySelector";
+import WalletBadge from "@/components/wallet/WalletBadge";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
