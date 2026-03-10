@@ -3,9 +3,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, Wallet, AlertTriangle } from "lucide-react";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import PaynowCheckout from "./PaynowCheckout";
+import { useWallet } from "@/contexts/WalletContext";
+import { useToast } from "@/hooks/use-toast";
+import DepositModal from "@/components/wallet/DepositModal";
 
 interface Business {
   name: string;
@@ -28,8 +30,10 @@ const PRESETS = [0.5, 1, 5, 10, 25, 50];
 
 const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => {
   const [quantity, setQuantity] = useState(1);
-  const [showPaynow, setShowPaynow] = useState(false);
+  const [depositOpen, setDepositOpen] = useState(false);
   const { format } = useCurrency();
+  const { balance, deduct } = useWallet();
+  const { toast } = useToast();
 
   if (!business) return null;
 
@@ -37,12 +41,21 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
   const subtotal = priceNum * quantity;
   const platformFee = +(subtotal * PLATFORM_FEE_PERCENT / 100).toFixed(2);
   const total = +(subtotal + platformFee).toFixed(2);
+  const hasEnough = balance >= total;
 
   const setQty = (v: number) => setQuantity(Math.min(Math.max(0.1, Math.round(v * 10) / 10), business.available));
 
-  const handleProceed = () => {
-    setShowPaynow(true);
-    onOpenChange(false);
+  const handleBuy = () => {
+    if (!hasEnough) {
+      toast({ title: "Insufficient balance", description: "Please deposit funds to your wallet first", variant: "destructive" });
+      return;
+    }
+    const success = deduct(total, `Bought ${quantity} ${business.tokens} tokens from ${business.name}`);
+    if (success) {
+      toast({ title: "Purchase successful!", description: `You bought ${quantity} ${business.tokens} token${quantity !== 1 ? "s" : ""}` });
+      setQuantity(1);
+      onOpenChange(false);
+    }
   };
 
   return (
@@ -55,6 +68,17 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
           </DialogHeader>
 
           <div className="space-y-5 pt-2">
+            {/* Wallet balance */}
+            <div className={`flex items-center justify-between rounded-lg p-3 ${hasEnough ? "bg-accent/5 border border-accent/20" : "bg-destructive/5 border border-destructive/20"}`}>
+              <div className="flex items-center gap-2">
+                <Wallet size={16} className={hasEnough ? "text-accent" : "text-destructive"} />
+                <span className="text-sm font-medium">Wallet Balance</span>
+              </div>
+              <span className={`font-display font-bold ${hasEnough ? "text-accent" : "text-destructive"}`}>
+                {format(balance)}
+              </span>
+            </div>
+
             <div className="grid grid-cols-2 gap-3 rounded-lg bg-muted/50 p-3 text-sm">
               <div>
                 <div className="text-xs text-muted-foreground mb-0.5">Price per token</div>
@@ -118,26 +142,43 @@ const BuyTokenModal = ({ business, open, onOpenChange }: BuyTokenModalProps) => 
               </div>
             </div>
 
-            <Button onClick={handleProceed} className="w-full bg-accent hover:bg-accent/90 text-white font-semibold h-11 text-base">
-              Proceed to Payment
+            {!hasEnough && (
+              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-sm">
+                <AlertTriangle size={16} className="text-destructive shrink-0" />
+                <div className="flex-1">
+                  <span className="text-destructive font-medium">Insufficient funds.</span>{" "}
+                  <span className="text-muted-foreground">You need {format(total - balance)} more.</span>
+                </div>
+                <Button size="sm" variant="outline" className="shrink-0 text-xs h-7" onClick={() => setDepositOpen(true)}>
+                  Deposit
+                </Button>
+              </div>
+            )}
+
+            <Button
+              onClick={hasEnough ? handleBuy : () => setDepositOpen(true)}
+              className="w-full bg-accent hover:bg-accent/90 text-white font-semibold h-11 text-base"
+            >
+              {hasEnough ? (
+                <>
+                  <Wallet size={16} className="mr-2" />
+                  Buy with Wallet — {format(total)}
+                </>
+              ) : (
+                <>
+                  <Plus size={16} className="mr-2" />
+                  Deposit Funds to Buy
+                </>
+              )}
             </Button>
             <p className="text-xs text-muted-foreground text-center">
-              Pay via EcoCash, OneMoney, or InnBucks through Paynow. Tokens minted on TON blockchain after confirmation.
+              Tokens are purchased from your platform wallet balance. Deposit via EcoCash, OneMoney, ZimSwitch, Visa, or Mastercard.
             </p>
           </div>
         </DialogContent>
       </Dialog>
 
-      <PaynowCheckout
-        open={showPaynow}
-        onOpenChange={setShowPaynow}
-        title={`Pay for ${quantity} ${business.tokens} Token${quantity !== 1 ? "s" : ""}`}
-        description={`${business.name} · ${business.sector}`}
-        subtotal={subtotal}
-        platformFee={platformFee}
-        total={total}
-        onSuccess={() => setQuantity(1)}
-      />
+      <DepositModal open={depositOpen} onOpenChange={setDepositOpen} />
     </>
   );
 };

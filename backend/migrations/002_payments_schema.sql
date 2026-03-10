@@ -1,9 +1,9 @@
 -- DePeer Monetisation Schema
 -- Payments, subscriptions, and platform fees
 
-CREATE TYPE payment_type AS ENUM ('token_purchase', 'listing_fee', 'subscription');
+CREATE TYPE payment_type AS ENUM ('deposit', 'token_purchase', 'listing_fee', 'subscription', 'withdrawal');
 CREATE TYPE payment_status AS ENUM ('pending', 'processing', 'completed', 'failed', 'cancelled');
-CREATE TYPE payment_method AS ENUM ('ecocash', 'onemoney', 'innbucks');
+CREATE TYPE payment_method AS ENUM ('ecocash', 'onemoney', 'zimswitch', 'visa', 'mastercard', 'bank_transfer');
 CREATE TYPE subscription_status AS ENUM ('active', 'expired', 'cancelled');
 
 /* ── Payments ── */
@@ -41,3 +41,14 @@ CREATE TABLE subscriptions (
 
 CREATE INDEX idx_subscriptions_user ON subscriptions(user_id);
 CREATE INDEX idx_subscriptions_status ON subscriptions(status);
+
+/* ── Wallet balances ── */
+CREATE TABLE wallets (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE NOT NULL UNIQUE,
+  balance NUMERIC(15, 2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_wallets_user ON wallets(user_id);
