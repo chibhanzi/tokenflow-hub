@@ -93,6 +93,9 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                 </Link>
               );
             })}
+            <div className="flex items-center gap-3 px-3 py-2 border-t border-white/10 mt-2 pt-3">
+              <CurrencySelector />
+            </div>
             <Link
               to="/login"
               className="block px-3 py-2 text-xs text-white/50 hover:text-white"
