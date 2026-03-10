@@ -41,3 +41,14 @@ CREATE TABLE subscriptions (
 
 CREATE INDEX idx_subscriptions_user ON subscriptions(user_id);
 CREATE INDEX idx_subscriptions_status ON subscriptions(status);
+
+/* ── Wallet balances ── */
+CREATE TABLE wallets (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE NOT NULL UNIQUE,
+  balance NUMERIC(15, 2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_wallets_user ON wallets(user_id);
