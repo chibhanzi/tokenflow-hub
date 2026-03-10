@@ -64,7 +64,6 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6 brightness-0 invert" /></Link>
           <div className="flex items-center gap-2">
             <WalletBadge />
-            <CurrencySelector />
             <NotificationPanel />
             <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
