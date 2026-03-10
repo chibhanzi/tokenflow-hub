@@ -47,7 +47,8 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
           })}
         </nav>
         <div className="p-4 border-t border-white/10 space-y-3">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <WalletBadge />
             <CurrencySelector />
             <NotificationPanel />
           </div>
