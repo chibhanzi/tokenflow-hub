@@ -63,6 +63,7 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
         <header className="lg:hidden flex items-center justify-between border-b border-white/10 bg-[hsl(220,35%,12%)] px-4 py-3">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-6 brightness-0 invert" /></Link>
           <div className="flex items-center gap-2">
+            <WalletBadge />
             <CurrencySelector />
             <NotificationPanel />
             <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
