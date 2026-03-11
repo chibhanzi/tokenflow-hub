@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, Scale, DollarSign, TrendingUp, ShieldCheck, Users, MapPin } from "lucide-react";
+import { BarChart3, Coins, History, Scale, DollarSign, TrendingUp, ShieldCheck, Users, MapPin, GitCompare, CreditCard } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -13,7 +13,8 @@ const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
   { to: "/investor/transactions", label: "Transactions", icon: History },
-  { to: "/investor/compare", label: "Compare", icon: Scale },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const getRadarData = (a: typeof businesses[0], b: typeof businesses[0]) => {
