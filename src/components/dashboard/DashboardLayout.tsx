@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { LucideIcon, Menu, X } from "lucide-react";
+import { LucideIcon, Menu, X, UserCircle } from "lucide-react";
 import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
 import NotificationPanel from "@/components/notifications/NotificationPanel";
@@ -49,12 +49,14 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
         <div className="p-4 border-t border-white/10 space-y-3">
           <div className="flex items-center gap-2 flex-wrap">
             <WalletBadge />
-            <CurrencySelector />
             <NotificationPanel />
           </div>
-          <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors block">
-            Sign Out
-          </Link>
+          <CurrencySelector className="w-full h-8 text-xs bg-[hsl(220,35%,18%)] border-white/10 text-white/70 hover:bg-[hsl(220,35%,22%)]" />
+          <div className="flex items-center justify-between">
+            <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors">
+              Sign Out
+            </Link>
+          </div>
         </div>
       </aside>
 
@@ -93,8 +95,8 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
                 </Link>
               );
             })}
-            <div className="flex items-center gap-3 px-3 py-2 border-t border-white/10 mt-2 pt-3">
-              <CurrencySelector />
+            <div className="px-3 py-2 border-t border-white/10 mt-2 pt-3 space-y-2">
+              <CurrencySelector className="w-full h-8 text-xs bg-[hsl(220,35%,18%)] border-white/10 text-white/70" />
             </div>
             <Link
               to="/login"
