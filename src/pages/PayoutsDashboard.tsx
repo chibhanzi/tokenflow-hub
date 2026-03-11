@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, TrendingUp, DollarSign, Calendar, RefreshCw } from "lucide-react";
+import { BarChart3, Coins, History, TrendingUp, DollarSign, Calendar, RefreshCw, GitCompare, CreditCard } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,8 @@ const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
   { to: "/investor/transactions", label: "Transactions", icon: History },
-  { to: "/investor/payouts", label: "Payouts", icon: DollarSign },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const payoutHistory = [

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 const navItems = [
   { to: "/business", label: "Overview", icon: Building2 },
-  { to: "/business/tokens", label: "My Tokens", icon: Coins },
+  { to: "/business/tokens", label: "Issued Tokens", icon: Coins },
   { to: "/business/investors", label: "Investors", icon: Users },
 ];
 

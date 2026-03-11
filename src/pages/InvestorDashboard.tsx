@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, Search, TrendingUp, Wallet, TrendingDown, ShoppingCart, ChevronRight, MapPin, Globe, ExternalLink, Calendar, Users, DollarSign } from "lucide-react";
+import { BarChart3, Coins, History, Search, TrendingUp, Wallet, TrendingDown, ShoppingCart, ChevronRight, MapPin, Globe, ExternalLink, Calendar, Users, DollarSign, GitCompare, CreditCard } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,8 @@ const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
   { to: "/investor/transactions", label: "Transactions", icon: History },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const portfolioData = [
