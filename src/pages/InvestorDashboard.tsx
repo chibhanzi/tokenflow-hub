@@ -18,6 +18,8 @@ const navItems = [
   { to: "/investor", label: "Portfolio", icon: BarChart3 },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
   { to: "/investor/transactions", label: "Transactions", icon: History },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const portfolioData = [

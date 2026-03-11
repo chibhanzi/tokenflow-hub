@@ -9,10 +9,14 @@ import MarketplaceCard from "@/components/marketplace/MarketplaceCard";
 import MarketplaceFilters from "@/components/marketplace/MarketplaceFilters";
 import { businesses, toSlug } from "@/data/businesses";
 
+import { GitCompare, CreditCard } from "lucide-react";
+
 const navItems = [
   { to: "/investor", label: "Portfolio", icon: TrendingUp },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
   { to: "/investor/transactions", label: "Transactions", icon: ShieldCheck },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const Marketplace = () => {
