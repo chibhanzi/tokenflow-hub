@@ -156,6 +156,11 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
+        <div className="mb-6">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground gap-1.5" onClick={() => navigate(-1)}>
+            <ArrowLeft size={16} /> Back
+          </Button>
+        </div>
         <div className="text-center mb-6">
           <Link to="/"><img src={depeerLogo} alt="DePeer" className="h-10 mx-auto" /></Link>
           <p className="text-muted-foreground mt-2 text-sm">Register your business</p>
