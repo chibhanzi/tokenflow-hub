@@ -61,9 +61,11 @@ const Marketplace = () => {
           <h1 className="font-display text-2xl font-bold">Token Marketplace</h1>
           <p className="text-muted-foreground text-sm mt-1">Browse and invest in tokenised African SMEs</p>
         </div>
-        <div className="relative w-full sm:w-72">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Search businesses..." className="pl-8" value={search} onChange={e => setSearch(e.target.value)} />
+        <div className="flex items-center gap-2">
+          <div className="relative w-full sm:w-56">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input placeholder="Search..." className="pl-8" value={search} onChange={e => setSearch(e.target.value)} />
+          </div>
         </div>
       </div>
 
