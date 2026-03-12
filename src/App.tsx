@@ -21,6 +21,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminBusinesses from "./pages/AdminBusinesses";
 import AdminUsers from "./pages/AdminUsers";
 import CompanyProfile from "./pages/CompanyProfile";
+import InvestorProfile from "./pages/InvestorProfile";
+import BusinessProfile from "./pages/BusinessProfile";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 
