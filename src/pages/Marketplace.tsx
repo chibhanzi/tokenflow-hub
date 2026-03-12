@@ -93,6 +93,7 @@ const Marketplace = () => {
               business={b}
               onView={() => navigate(`/investor/company/${toSlug(b.name)}`)}
               onBuy={() => handleBuy(b)}
+              onCompare={() => navigate("/investor/compare")}
             />
           ))}
         </div>

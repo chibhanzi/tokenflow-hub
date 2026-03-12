@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { LucideIcon, Menu, X, UserCircle } from "lucide-react";
+import { LucideIcon, Menu, X, UserCircle, Settings } from "lucide-react";
 import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
 import NotificationPanel from "@/components/notifications/NotificationPanel";
@@ -53,10 +53,16 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
           </div>
           <CurrencySelector className="w-full h-8 text-xs bg-[hsl(220,35%,18%)] border-white/10 text-white/70 hover:bg-[hsl(220,35%,22%)]" />
           <div className="flex items-center justify-between">
-            <Link to="/login" className="text-xs text-white/50 hover:text-white transition-colors">
-              Sign Out
+            <Link
+              to={title.includes("Business") ? "/business/profile" : "/investor/profile"}
+              className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white transition-colors"
+            >
+              <Settings size={14} /> Profile & Settings
             </Link>
           </div>
+          <Link to="/login" className="block text-xs text-white/50 hover:text-white transition-colors">
+            Sign Out
+          </Link>
         </div>
       </aside>
 
@@ -97,6 +103,13 @@ const DashboardLayout = ({ children, title, navItems }: DashboardLayoutProps) =>
             })}
             <div className="px-3 py-2 border-t border-white/10 mt-2 pt-3 space-y-2">
               <CurrencySelector className="w-full h-8 text-xs bg-[hsl(220,35%,18%)] border-white/10 text-white/70" />
+              <Link
+                to={title.includes("Business") ? "/business/profile" : "/investor/profile"}
+                className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white py-1"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Settings size={14} /> Profile & Settings
+              </Link>
             </div>
             <Link
               to="/login"

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Calendar, Users, BarChart3, Eye } from "lucide-react";
+import { MapPin, Calendar, Users, BarChart3, Eye, GitCompare } from "lucide-react";
 
 interface Business {
   name: string;
@@ -23,9 +23,10 @@ interface MarketplaceCardProps {
   business: Business;
   onView: () => void;
   onBuy: () => void;
+  onCompare?: () => void;
 }
 
-const MarketplaceCard = ({ business: b, onView, onBuy }: MarketplaceCardProps) => (
+const MarketplaceCard = ({ business: b, onView, onBuy, onCompare }: MarketplaceCardProps) => (
   <Card className="hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all overflow-hidden">
     <CardHeader className="pb-3">
       <div className="flex items-start gap-3">
@@ -75,10 +76,15 @@ const MarketplaceCard = ({ business: b, onView, onBuy }: MarketplaceCardProps) =
 
       <div className="flex gap-2">
         <Button variant="outline" onClick={onView} className="flex-1 text-sm font-semibold">
-          <Eye size={14} className="mr-1" /> View Details
+          <Eye size={14} className="mr-1" /> View
         </Button>
+        {onCompare && (
+          <Button variant="outline" onClick={onCompare} className="text-sm font-semibold px-3" title="Compare">
+            <GitCompare size={14} />
+          </Button>
+        )}
         <Button onClick={onBuy} className="flex-1 bg-accent hover:bg-accent/90 text-white text-sm font-semibold">
-          Buy Tokens
+          Buy
         </Button>
       </div>
     </CardContent>

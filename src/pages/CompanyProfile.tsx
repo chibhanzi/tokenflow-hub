@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { Coins, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3, Globe, ArrowLeft, Building2, DollarSign, Briefcase, ExternalLink } from "lucide-react";
+import { Coins, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3, Globe, ArrowLeft, Building2, DollarSign, Briefcase, ExternalLink, GitCompare, CreditCard, History } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,11 @@ import RegulatoryBadge from "@/components/compliance/RegulatoryBadge";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const navItems = [
-  { to: "/investor", label: "Portfolio", icon: TrendingUp },
+  { to: "/investor", label: "Portfolio", icon: BarChart3 },
   { to: "/investor/marketplace", label: "Marketplace", icon: Coins },
-  { to: "/investor/transactions", label: "Transactions", icon: ShieldCheck },
+  { to: "/investor/transactions", label: "Transactions", icon: History },
+  { to: "/investor/compare", label: "Compare", icon: GitCompare },
+  { to: "/investor/payouts", label: "Payouts", icon: CreditCard },
 ];
 
 const businessesData: Record<string, {
@@ -140,11 +142,14 @@ const CompanyProfile = () => {
             <span className="flex items-center gap-1"><Users size={14} /> {company.employees} employees</span>
           </div>
         </div>
-        <div className="flex gap-2 shrink-0">
+        <div className="flex flex-wrap gap-2 shrink-0">
           <Button variant="outline" size="sm" asChild>
             <a href={company.website} target="_blank" rel="noopener noreferrer">
               <Globe size={14} className="mr-1" /> Website <ExternalLink size={12} className="ml-1" />
             </a>
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => navigate("/investor/compare")}>
+            <GitCompare size={14} className="mr-1" /> Compare
           </Button>
           <Button size="sm" className="bg-accent hover:bg-accent/90 text-white" onClick={() => setModalOpen(true)}>Buy Tokens</Button>
         </div>
