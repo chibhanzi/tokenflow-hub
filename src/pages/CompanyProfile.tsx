@@ -142,11 +142,14 @@ const CompanyProfile = () => {
             <span className="flex items-center gap-1"><Users size={14} /> {company.employees} employees</span>
           </div>
         </div>
-        <div className="flex gap-2 shrink-0">
+        <div className="flex flex-wrap gap-2 shrink-0">
           <Button variant="outline" size="sm" asChild>
             <a href={company.website} target="_blank" rel="noopener noreferrer">
               <Globe size={14} className="mr-1" /> Website <ExternalLink size={12} className="ml-1" />
             </a>
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => navigate("/investor/compare")}>
+            <GitCompare size={14} className="mr-1" /> Compare
           </Button>
           <Button size="sm" className="bg-accent hover:bg-accent/90 text-white" onClick={() => setModalOpen(true)}>Buy Tokens</Button>
         </div>
