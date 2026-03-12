@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { LucideIcon, Menu, X, UserCircle } from "lucide-react";
+import { LucideIcon, Menu, X, UserCircle, Settings } from "lucide-react";
 import { useState } from "react";
 import depeerLogo from "@/assets/depeer-logo.png";
 import NotificationPanel from "@/components/notifications/NotificationPanel";
