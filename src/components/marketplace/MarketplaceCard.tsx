@@ -23,6 +23,7 @@ interface MarketplaceCardProps {
   business: Business;
   onView: () => void;
   onBuy: () => void;
+  onCompare?: () => void;
 }
 
 const MarketplaceCard = ({ business: b, onView, onBuy }: MarketplaceCardProps) => (
