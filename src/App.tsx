@@ -47,6 +47,7 @@ const App = () => (
             <Route path="/investor/compare" element={<CompareBusinesses />} />
             <Route path="/investor/risk-profile" element={<InvestorRiskProfile />} />
             <Route path="/investor/company/:slug" element={<CompanyProfile />} />
+            <Route path="/investor/profile" element={<InvestorProfile />} />
             <Route path="/business" element={<BusinessDashboard />} />
             <Route path="/business/tokens" element={<BusinessTokens />} />
             <Route path="/business/investors" element={<BusinessInvestors />} />
