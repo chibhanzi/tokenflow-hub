@@ -26,7 +26,7 @@ interface MarketplaceCardProps {
   onCompare?: () => void;
 }
 
-const MarketplaceCard = ({ business: b, onView, onBuy }: MarketplaceCardProps) => (
+const MarketplaceCard = ({ business: b, onView, onBuy, onCompare }: MarketplaceCardProps) => (
   <Card className="hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all overflow-hidden">
     <CardHeader className="pb-3">
       <div className="flex items-start gap-3">
