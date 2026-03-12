@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Calendar, Users, BarChart3, Eye } from "lucide-react";
+import { MapPin, Calendar, Users, BarChart3, Eye, GitCompare } from "lucide-react";
 
 interface Business {
   name: string;
