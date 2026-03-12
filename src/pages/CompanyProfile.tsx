@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { Coins, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3, Globe, ArrowLeft, Building2, DollarSign, Briefcase, ExternalLink } from "lucide-react";
+import { Coins, ShieldCheck, TrendingUp, MapPin, Calendar, Users, BarChart3, Globe, ArrowLeft, Building2, DollarSign, Briefcase, ExternalLink, GitCompare, CreditCard, History } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
