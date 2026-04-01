@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { WalletProvider } from "@/contexts/WalletContext";
+import { KycProvider } from "@/contexts/KycContext";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -25,6 +26,7 @@ import InvestorProfile from "./pages/InvestorProfile";
 import BusinessProfile from "./pages/BusinessProfile";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
+import KycVerification from "./pages/KycVerification";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <CurrencyProvider>
       <WalletProvider>
+      <KycProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -48,6 +51,7 @@ const App = () => (
             <Route path="/investor/risk-profile" element={<InvestorRiskProfile />} />
             <Route path="/investor/company/:slug" element={<CompanyProfile />} />
             <Route path="/investor/profile" element={<InvestorProfile />} />
+            <Route path="/investor/kyc" element={<KycVerification />} />
             <Route path="/business" element={<BusinessDashboard />} />
             <Route path="/business/tokens" element={<BusinessTokens />} />
             <Route path="/business/investors" element={<BusinessInvestors />} />
@@ -60,6 +64,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
+      </KycProvider>
       </WalletProvider>
     </CurrencyProvider>
   </QueryClientProvider>
