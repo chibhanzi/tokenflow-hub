@@ -67,12 +67,11 @@ const MarketplaceFilters = ({
   };
 
   return (
-    <div className="flex items-center gap-3 mb-6">
+    <>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="outline" className="relative gap-2">
-            <SlidersHorizontal size={15} />
-            Filters
+          <Button variant="outline" size="icon" className="relative shrink-0">
+            <SlidersHorizontal size={16} />
             {activeCount > 0 && (
               <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
                 {activeCount}
