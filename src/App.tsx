@@ -26,6 +26,7 @@ import InvestorProfile from "./pages/InvestorProfile";
 import BusinessProfile from "./pages/BusinessProfile";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
+import KycVerification from "./pages/KycVerification";
 
 const queryClient = new QueryClient();
 
