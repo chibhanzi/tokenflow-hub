@@ -31,6 +31,7 @@ const getRadarData = (a: typeof businesses[0], b: typeof businesses[0]) => {
 };
 
 const CompareBusinesses = () => {
+  const navigate = useNavigate();
   const [leftIdx, setLeftIdx] = useState(0);
   const [rightIdx, setRightIdx] = useState(2);
   const { format } = useCurrency();
