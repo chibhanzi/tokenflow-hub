@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import { BarChart3, Coins, History, Scale, DollarSign, TrendingUp, ShieldCheck, Users, MapPin, GitCompare, CreditCard } from "lucide-react";
+import { BarChart3, Coins, History, Scale, DollarSign, TrendingUp, ShieldCheck, Users, MapPin, GitCompare, CreditCard, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { businesses } from "@/data/businesses";
@@ -30,6 +32,7 @@ const getRadarData = (a: typeof businesses[0], b: typeof businesses[0]) => {
 };
 
 const CompareBusinesses = () => {
+  const navigate = useNavigate();
   const [leftIdx, setLeftIdx] = useState(0);
   const [rightIdx, setRightIdx] = useState(2);
   const { format } = useCurrency();
@@ -55,6 +58,9 @@ const CompareBusinesses = () => {
   return (
     <DashboardLayout title="Investor Dashboard" navItems={navItems}>
       <div className="mb-8">
+        <Button variant="ghost" size="sm" className="mb-2 -ml-2 gap-1 text-muted-foreground" onClick={() => navigate(-1)}>
+          <ArrowLeft size={16} /> Back
+        </Button>
         <h1 className="font-display text-2xl font-bold">Compare Businesses</h1>
         <p className="text-muted-foreground text-sm mt-1">Side-by-side analysis for informed investment decisions</p>
       </div>
