@@ -72,8 +72,10 @@ const Marketplace = () => {
         sortBy={sortBy}
         onSectorChange={setSectorFilter}
         onTokenChange={setTokenFilter}
-        onSortChange={setSortBy}
-      />
+            onSortChange={setSortBy}
+          />
+        </div>
+      </div>
 
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-muted-foreground">

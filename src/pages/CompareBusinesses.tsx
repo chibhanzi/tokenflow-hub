@@ -57,6 +57,9 @@ const CompareBusinesses = () => {
   return (
     <DashboardLayout title="Investor Dashboard" navItems={navItems}>
       <div className="mb-8">
+        <Button variant="ghost" size="sm" className="mb-2 -ml-2 gap-1 text-muted-foreground" onClick={() => navigate(-1)}>
+          <ArrowLeft size={16} /> Back
+        </Button>
         <h1 className="font-display text-2xl font-bold">Compare Businesses</h1>
         <p className="text-muted-foreground text-sm mt-1">Side-by-side analysis for informed investment decisions</p>
       </div>

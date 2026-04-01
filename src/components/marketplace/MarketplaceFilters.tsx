@@ -127,20 +127,7 @@ const MarketplaceFilters = ({
         </SheetContent>
       </Sheet>
 
-      {/* Active filter pills */}
-      {sectorFilter !== "All" && (
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20">
-          {sectorFilter}
-          <button onClick={() => onSectorChange("All")} className="hover:opacity-70"><X size={10} /></button>
-        </div>
-      )}
-      {tokenFilter !== "All" && (
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20">
-          {tokenFilter}
-          <button onClick={() => onTokenChange("All")} className="hover:opacity-70"><X size={10} /></button>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
